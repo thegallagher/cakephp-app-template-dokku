@@ -1,4 +1,6 @@
-# App Template (Modified for Dokku compatibility)
+# App Template
+
+**(Modified for Dokku compatibility)**
 
 An empty CakePHP project for use with composer
 
@@ -8,7 +10,7 @@ PHP 5.4 and above.
 
 ## Installation
 
-	composer -sdev create-project friendsofcake/app-template ProjectName
+	composer create-project -sdev --repository-url=http://thegallagher.github.io/composer-repository thegallagher/cakephp-app-template-dokku
 
 This will create a new project, with dependencies, based on this repository. Be sure to point
 the webserver at the `webroot` folder and ensure that [URL rewriting][1]
@@ -63,13 +65,34 @@ If you don't want to use Env variables and DSNs - change it =).
 
 ## Dokku Compatibility
 
-Your Dokku server will need to be setup with the [user-env-compile](https://github.com/musicglue/dokku-user-env-compile) plugin.
+Your Dokku server will need to be setup with the [user-env-compile](https://github.com/motin/dokku-user-env-compile) plugin.
+
+Deploy your app with:
+
+    git remote add dokku dokku@<domain.name>:<app_name>
+    git push dokku master
 
 This application template is compatible with the [CHH/heroku-buildpack-php](https://github.com/CHH/heroku-buildpack-php) project. To use, simply configure your buildpack:
 
-    ssh dokku@<yourserver.com> config:set <app_name> BUILDPACK_URL=https://github.com/CHH/heroku-buildpack-php
-    ssh dokku@<yourserver.com> config:set <app_name> SECURITY_SALT=<SOME_ALPHANUMERIC_SALT_HERE>
-    ssh dokku@<yourserver.com> config:set <app_name> SECURITY_CIPHER_SEED=<SOME_NUMERIC_SEED_HERE>
+    dokku config:set <app_name> BUILDPACK_URL=https://github.com/CHH/heroku-buildpack-php
+    dokku config:set <app_name> SECURITY_SALT=<SOME_ALPHANUMERIC_SALT_HERE>
+    dokku config:set <app_name> SECURITY_CIPHER_SEED=<SOME_NUMERIC_SEED_HERE>
+
+You will probably want MySQL too. Get this [MySQL plugin](https://github.com/victorgama/dokku-mysql-plugin). To install:
+
+    cd /var/lib/dokku/plugins
+    git clone https://github.com/victorgama/dokku-mysql-plugin mysql
+    dokku plugins-install
+
+Then create a database for your app:
+
+    dokku mysql:create <app_name>
+
+Due to the way the plugin added the `DATABASE_URL` config, you will need to change the value slightly:
+
+    dokku config:get <app_name> DATABASE_URL
+    # > mysql2://admin:password@1.1.1.1:3306/db
+    dokku config:set <app_name> DATABASE_URL=mysql://admin:password@1.1.1.1:3306/db # Change 'mysql2' to 'mysql'
 
 ## Note about dependencies
 
