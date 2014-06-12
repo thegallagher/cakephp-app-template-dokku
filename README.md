@@ -65,16 +65,17 @@ If you don't want to use Env variables and DSNs - change it =).
 
 ## Dokku Compatibility
 
-Your Dokku server will need to be setup with the [user-env-compile](https://github.com/motin/dokku-user-env-compile) plugin.
+*This application template is currently NOT compatible with the [CHH/heroku-buildpack-php](https://github.com/CHH/heroku-buildpack-php) project.*
+
+Your Dokku server will need to be setup with the [user-env-compile](https://github.com/musicglue/dokku-user-env-compile) plugin.
 
 Deploy your app with:
 
     git remote add dokku dokku@<domain.name>:<app_name>
     git push dokku master
 
-This application template is compatible with the [CHH/heroku-buildpack-php](https://github.com/CHH/heroku-buildpack-php) project. To use, simply configure your buildpack:
+Configure security:
 
-    dokku config:set <app_name> BUILDPACK_URL=https://github.com/CHH/heroku-buildpack-php
     dokku config:set <app_name> SECURITY_SALT=<SOME_ALPHANUMERIC_SALT_HERE>
     dokku config:set <app_name> SECURITY_CIPHER_SEED=<SOME_NUMERIC_SEED_HERE>
 
