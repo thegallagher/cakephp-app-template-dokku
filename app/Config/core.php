@@ -38,7 +38,7 @@ spl_autoload_register(['App', 'load'], true, true);
 if (!env('APP_NAME')) {
 	try {
 		josegonzalez\Dotenv\Loader::load([
-			'filepath' => __DIR__ . DS . '.env',
+			'filepath' => ROOT . DS . '.env',
 			'toServer' => false,
 			'skipExisting' => ['toServer'],
 			'raiseExceptions' => false
@@ -48,7 +48,7 @@ if (!env('APP_NAME')) {
 		// That means the code can assume appropriate env config always exists
 		// Don't trap this incase there's some other fundamental error
 		josegonzalez\Dotenv\Loader::load([
-			'filepath' => __DIR__ . DS . '.env.default',
+			'filepath' => ROOT . DS . '.env.default',
 			'toServer' => false,
 			'skipExisting' => ['toServer'],
 			'raiseExceptions' => false

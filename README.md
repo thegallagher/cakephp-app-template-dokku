@@ -1,4 +1,4 @@
-# App Template
+# App Template (Modified for Dokku compatibility)
 
 An empty CakePHP project for use with composer
 
@@ -61,14 +61,15 @@ If you don't want to use Env variables and DSNs - change it =).
  * Remove the php-dotenv loading logic
  * It's also recommended to remove `database.php` (and `core.php` and `email.php`) from the repository as they need to be modified on each install
 
-## Heroku Compatibility
+## Dokku Compatibility
+
+Your Dokku server will need to be setup with the [user-env-compile](https://github.com/musicglue/dokku-user-env-compile) plugin.
 
 This application template is compatible with the [CHH/heroku-buildpack-php](https://github.com/CHH/heroku-buildpack-php) project. To use, simply configure your buildpack:
 
-    heroku config:set BUILDPACK_URL=https://github.com/CHH/heroku-buildpack-php
-    heroku config:set LOG_PATH=/app/vendor/php/var/log/
-    heroku config:set SECURITY_SALT=SOME_ALPHANUMERIC_SALT_HERE
-    heroku config:set SECURITY_CIPHER_SEED=SOME_NUMERIC_SEED_HERE
+    ssh dokku@<yourserver.com> config:set <app_name> BUILDPACK_URL=https://github.com/CHH/heroku-buildpack-php
+    ssh dokku@<yourserver.com> config:set <app_name> SECURITY_SALT=<SOME_ALPHANUMERIC_SALT_HERE>
+    ssh dokku@<yourserver.com> config:set <app_name> SECURITY_CIPHER_SEED=<SOME_NUMERIC_SEED_HERE>
 
 ## Note about dependencies
 

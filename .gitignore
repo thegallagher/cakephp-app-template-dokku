@@ -1,6 +1,7 @@
 # User specific & automatically generated files #
 #################################################
-/app/Config/.env
-/tmp
+/.env
+/tmp/*
 /Plugin
 /vendor
+!empty
