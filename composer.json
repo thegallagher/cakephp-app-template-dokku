@@ -24,7 +24,11 @@
     "heroku": {
       "framework": "cakephp2",
       "document-root": "webroot",
-      "index-document": "index.php"
+      "index-document": "index.php",
+      "compile": [
+        "mkdir tmp",
+        "chmod -R 0777 tmp"
+      ]
     }
   }
 }
