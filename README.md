@@ -65,8 +65,6 @@ If you don't want to use Env variables and DSNs - change it =).
 
 ## Dokku Compatibility
 
-*This application template is currently NOT compatible with the [CHH/heroku-buildpack-php](https://github.com/CHH/heroku-buildpack-php) project.*
-
 Your Dokku server will need to be setup with the [user-env-compile](https://github.com/musicglue/dokku-user-env-compile) plugin.
 
 Deploy your app with:
